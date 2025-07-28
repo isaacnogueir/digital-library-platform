@@ -120,15 +120,28 @@ src/
 - [ ] Sistema de recomendações
 - [ ] App mobile
 - [ ] Relatórios avançados
+## Status do Projeto
 
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-## 👨‍💻 Autor
+## Contato
 
 **Isaac Nogueira**
+- Email: [seu-email@email.com]
+- LinkedIn: [Isaac Nogueira](https://www.linkedin.com/in/isaacferreiran)
 - GitHub: [@isaacnogueir](https://github.com/isaacnogueir)
-- LinkedIn: [Isaac Nogueira](https://www.linkedin.com/in/isaacferreiran/)
 
 ---
-⭐ **Se este projeto te ajudou, deixe uma estrela!**
 
-📧 **Dúvidas?** Abra uma [issue](https://github.com/isaacnogueir/digital-library-platform/issues) ou entre em contato!
+**Se este projeto te ajudou, deixe uma estrela!**
+
+**Compartilhe com outros desenvolvedores!**
+
+## Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
+*Desenvolvido com por Isaac Nogueira*
