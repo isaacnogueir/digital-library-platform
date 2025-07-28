@@ -1,0 +1,15 @@
+package com.project2025.auth_2.exception;
+
+public enum ErrorCode {
+    USER_ALREADY_EXISTS,
+    BOOK_ALREADY_EXISTS,
+    USER_NOT_FOUND,
+    BOOK_NOT_FOUND,
+    LOAN_NOT_FOUND,
+    USER_UNAVAILABLE,
+    BOOK_UNAVAILABLE,
+    LOAN_ALREADY_RETURNED,
+    INVALID_CREDENTIALS,
+    INVALID_OPERATION
+
+}
