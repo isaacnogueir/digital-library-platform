@@ -229,4 +229,4 @@ Authorization: Bearer seu_token_jwt_aqui
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
-*Desenvolvido com dedicação por Isaac Nogueira*
+*Desenvolvido por Isaac Nogueira*
