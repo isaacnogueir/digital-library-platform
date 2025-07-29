@@ -1,10 +1,10 @@
-package com.project2025.auth_2;
+package com.project2025.digital_library_platform;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SistemaSimplesDeAutenticacaoApplicationTests {
+class DigitalLibraryPlatformApplicationTests {
 
 	@Test
 	void contextLoads() {
