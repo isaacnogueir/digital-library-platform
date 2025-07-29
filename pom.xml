@@ -13,10 +13,10 @@
     </parent>
 
     <groupId>com.project25</groupId>
-    <artifactId>auth-2</artifactId>
+    <artifactId>digital-library-platform</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>auth-2</name>
-    <description>Sistema simples de autenticação</description>
+    <name>digital-library-platform</name>
+    <description>Sistema de gerenciamento de biblioteca</description>
 
     <properties>
         <java.version>17</java.version>
