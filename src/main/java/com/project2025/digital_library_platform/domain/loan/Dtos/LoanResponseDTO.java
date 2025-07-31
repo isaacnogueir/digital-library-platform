@@ -1,4 +1,4 @@
-package com.project2025.digital_library_platform.domain.loan;
+package com.project2025.digital_library_platform.domain.loan.Dtos;
 
 import java.time.LocalDateTime;
 

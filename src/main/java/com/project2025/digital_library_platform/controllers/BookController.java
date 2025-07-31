@@ -1,9 +1,9 @@
 package com.project2025.digital_library_platform.controllers;
 
 
-import com.project2025.digital_library_platform.domain.book.BookCreateDTO;
-import com.project2025.digital_library_platform.domain.book.BookResponseDTO;
-import com.project2025.digital_library_platform.domain.book.BookUpdateDTO;
+import com.project2025.digital_library_platform.domain.book.dtos.BookCreateDTO;
+import com.project2025.digital_library_platform.domain.book.dtos.BookResponseDTO;
+import com.project2025.digital_library_platform.domain.book.dtos.BookUpdateDTO;
 import com.project2025.digital_library_platform.services.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

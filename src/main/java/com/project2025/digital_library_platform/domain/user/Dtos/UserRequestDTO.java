@@ -1,8 +1,8 @@
-package com.project2025.digital_library_platform.domain.user;
+package com.project2025.digital_library_platform.domain.user.Dtos;
 
+import com.project2025.digital_library_platform.domain.user.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

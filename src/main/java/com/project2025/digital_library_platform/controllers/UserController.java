@@ -3,8 +3,8 @@ package com.project2025.digital_library_platform.controllers;
 import com.project2025.digital_library_platform.domain.user.Role;
 import com.project2025.digital_library_platform.domain.user.User;
 
-import com.project2025.digital_library_platform.domain.user.UserResponseDTO;
-import com.project2025.digital_library_platform.domain.user.UserUpdateDTO;
+import com.project2025.digital_library_platform.domain.user.Dtos.UserResponseDTO;
+import com.project2025.digital_library_platform.domain.user.Dtos.UserUpdateDTO;
 import com.project2025.digital_library_platform.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

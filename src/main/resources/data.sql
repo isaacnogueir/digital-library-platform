@@ -1,3 +1,7 @@
+-- =========================================
+-- INSERÇÃO DE USUÁRIOS (Mantém a estrutura original)
+-- =========================================
+
 -- Usuários Administradores
 INSERT INTO users (login, password, nome, email, telefone, endereco, role, active, created_at, updated_at)
 VALUES
@@ -32,44 +36,60 @@ VALUES
 ('isabela_des', '$2a$10$N.zmdr9k7uOCQb376NoUnuTJ8ioctKcnw2wJM8uc/Lna5EMXcsWEu', 'Isabela Costa Designer', 'isabela.des@hotmail.com', '21811009988', 'Lagoa, 012', 'USER', true, NOW(), NOW());
 
 -- =========================================
--- INSERÇÃO DE LIVROS
+-- INSERÇÃO DE LIVROS (Nova estrutura com campos do Google Books)
 -- =========================================
 
 -- Clássicos da Literatura
-INSERT INTO books (title, author, isbn, publication_year, publisher_name, status, active, created_at, updated_at)
+INSERT INTO books (google_books_id, title, authors, publisher, published_date, isbn_10, isbn_13, description, thumbnail_url, page_count, status, active, created_at, updated_at)
 VALUES
-('Dom Quixote', 'Miguel de Cervantes', '978-85-359-0277-5', 1605, 'Editora Moderna', 'AVAILABLE', true, NOW(), NOW()),
-('1984', 'George Orwell', '978-85-250-4393-4', 1949, 'Companhia das Letras', 'AVAILABLE', true, NOW(), NOW()),
-('O Pequeno Príncipe', 'Antoine de Saint-Exupéry', '978-85-359-0635-3', 1943, 'Editora Ática', 'LOANED', true, NOW(), NOW()),
-('Orgulho e Preconceito', 'Jane Austen', '978-85-359-2847-8', 1813, 'Penguin Classics', 'AVAILABLE', true, NOW(), NOW()),
-('Cem Anos de Solidão', 'Gabriel García Márquez', '978-85-359-0012-2', 1967, 'Record', 'AVAILABLE', true, NOW(), NOW());
+(NULL, 'Dom Quixote', 'Miguel de Cervantes', 'Editora Moderna', '1605', '8535902775', '978-85-359-0277-5', 'A obra-prima da literatura espanhola que narra as aventuras de um fidalgo que decide se tornar cavaleiro andante.', NULL, 863, 'AVAILABLE', true, NOW(), NOW()),
+
+(NULL, '1984', 'George Orwell', 'Companhia das Letras', '1949', '8525043934', '978-85-250-4393-4', 'Romance distópico que retrata uma sociedade totalitária onde o governo controla todos os aspectos da vida.', NULL, 416, 'AVAILABLE', true, NOW(), NOW()),
+
+(NULL, 'O Pequeno Príncipe', 'Antoine de Saint-Exupéry', 'Editora Ática', '1943', '8535906353', '978-85-359-0635-3', 'Fábula poética sobre um piloto perdido no deserto que encontra um jovem príncipe de outro planeta.', NULL, 96, 'LOANED', true, NOW(), NOW()),
+
+(NULL, 'Orgulho e Preconceito', 'Jane Austen', 'Penguin Classics', '1813', '8535928478', '978-85-359-2847-8', 'Romance clássico que explora temas de amor, reputação e classe na Inglaterra georgiana.', NULL, 432, 'AVAILABLE', true, NOW(), NOW()),
+
+(NULL, 'Cem Anos de Solidão', 'Gabriel García Márquez', 'Record', '1967', '8535900122', '978-85-359-0012-2', 'Saga familiar que narra a história de sete gerações da família Buendía na cidade fictícia de Macondo.', NULL, 432, 'AVAILABLE', true, NOW(), NOW());
 
 -- Literatura Brasileira
-INSERT INTO books (title, author, isbn, publication_year, publisher_name, status, active, created_at, updated_at)
+INSERT INTO books (google_books_id, title, authors, publisher, published_date, isbn_10, isbn_13, description, thumbnail_url, page_count, status, active, created_at, updated_at)
 VALUES
-('O Cortiço', 'Aluísio Azevedo', '978-85-16-03847-2', 1890, 'Editora Scipione', 'AVAILABLE', true, NOW(), NOW()),
-('Dom Casmurro', 'Machado de Assis', '978-85-359-0123-5', 1899, 'Editora Globo', 'LOANED', true, NOW(), NOW()),
-('O Guarani', 'José de Alencar', '978-85-16-04521-0', 1857, 'Editora FTD', 'AVAILABLE', true, NOW(), NOW()),
-('Quincas Borba', 'Machado de Assis', '978-85-359-0456-4', 1891, 'Editora Globo', 'AVAILABLE', true, NOW(), NOW()),
-('Iracema', 'José de Alencar', '978-85-16-05234-8', 1865, 'Editora Ática', 'UNAVAILABLE', false, NOW(), NOW());
+(NULL, 'O Cortiço', 'Aluísio Azevedo', 'Editora Scipione', '1890', '8516038472', '978-85-16-03847-2', 'Romance naturalista que retrata a vida em um cortiço no Rio de Janeiro do século XIX.', NULL, 304, 'AVAILABLE', true, NOW(), NOW()),
+
+(NULL, 'Dom Casmurro', 'Machado de Assis', 'Editora Globo', '1899', '8535901235', '978-85-359-0123-5', 'Romance que narra a história de Bentinho e sua suspeita sobre a traição de Capitu.', NULL, 256, 'LOANED', true, NOW(), NOW()),
+
+(NULL, 'O Guarani', 'José de Alencar', 'Editora FTD', '1857', '8516045210', '978-85-16-04521-0', 'Romance indianista que narra a história de amor entre Peri e Ceci.', NULL, 368, 'AVAILABLE', true, NOW(), NOW()),
+
+(NULL, 'Quincas Borba', 'Machado de Assis', 'Editora Globo', '1891', '8535904564', '978-85-359-0456-4', 'Romance que continua a filosofia do Humanitismo iniciada em Memórias Póstumas de Brás Cubas.', NULL, 288, 'AVAILABLE', true, NOW(), NOW()),
+
+(NULL, 'Iracema', 'José de Alencar', 'Editora Ática', '1865', '8516052348', '978-85-16-05234-8', 'Lenda do Ceará que narra a história da índia Iracema e do português Martim.', NULL, 144, 'UNAVAILABLE', false, NOW(), NOW());
 
 -- Ficção Científica e Fantasia
-INSERT INTO books (title, author, isbn, publication_year, publisher_name, status, active, created_at, updated_at)
+INSERT INTO books (google_books_id, title, authors, publisher, published_date, isbn_10, isbn_13, description, thumbnail_url, page_count, status, active, created_at, updated_at)
 VALUES
-('Duna', 'Frank Herbert', '978-85-7522-484-4', 1965, 'Aleph', 'AVAILABLE', true, NOW(), NOW()),
-('Fundação', 'Isaac Asimov', '978-85-7522-125-6', 1951, 'Aleph', 'AVAILABLE', true, NOW(), NOW()),
-('O Hobbit', 'J.R.R. Tolkien', '978-85-7522-789-0', 1937, 'HarperCollins', 'LOANED', true, NOW(), NOW()),
-('Neuromancer', 'William Gibson', '978-85-7522-456-1', 1984, 'Aleph', 'AVAILABLE', true, NOW(), NOW()),
-('O Guia do Mochileiro das Galáxias', 'Douglas Adams', '978-85-7522-123-2', 1979, 'Arqueiro', 'AVAILABLE', true, NOW(), NOW());
+(NULL, 'Duna', 'Frank Herbert', 'Aleph', '1965', '8575224844', '978-85-7522-484-4', 'Épico de ficção científica ambientado no planeta desértico Arrakis, fonte da especiaria melange.', NULL, 688, 'AVAILABLE', true, NOW(), NOW()),
+
+(NULL, 'Fundação', 'Isaac Asimov', 'Aleph', '1951', '8575221256', '978-85-7522-125-6', 'Primeiro livro da saga que narra o declínio do Império Galáctico e a criação da Fundação.', NULL, 256, 'AVAILABLE', true, NOW(), NOW()),
+
+(NULL, 'O Hobbit', 'J.R.R. Tolkien', 'HarperCollins', '1937', '8575227890', '978-85-7522-789-0', 'As aventuras de Bilbo Bolseiro em uma jornada épica com anões para recuperar um tesouro guardado por um dragão.', NULL, 336, 'LOANED', true, NOW(), NOW()),
+
+(NULL, 'Neuromancer', 'William Gibson', 'Aleph', '1984', '8575224561', '978-85-7522-456-1', 'Romance cyberpunk que definiu o gênero, seguindo o hacker Case em um mundo de inteligência artificial.', NULL, 304, 'AVAILABLE', true, NOW(), NOW()),
+
+(NULL, 'O Guia do Mochileiro das Galáxias', 'Douglas Adams', 'Arqueiro', '1979', '8575221232', '978-85-7522-123-2', 'Comédia de ficção científica sobre as aventuras de Arthur Dent pelo universo.', NULL, 224, 'AVAILABLE', true, NOW(), NOW());
 
 -- Tecnologia e Programação
-INSERT INTO books (title, author, isbn, publication_year, publisher_name, status, active, created_at, updated_at)
+INSERT INTO books (google_books_id, title, authors, publisher, published_date, isbn_10, isbn_13, description, thumbnail_url, page_count, status, active, created_at, updated_at)
 VALUES
-('Clean Code', 'Robert C. Martin', '978-85-7522-901-6', 2008, 'Alta Books', 'AVAILABLE', true, NOW(), NOW()),
-('Java: Como Programar', 'Paul Deitel', '978-85-430-2348-9', 2017, 'Pearson', 'LOANED', true, NOW(), NOW()),
-('Padrões de Projetos', 'Erich Gamma', '978-85-7522-567-4', 1994, 'Bookman', 'AVAILABLE', true, NOW(), NOW()),
-('Spring Boot em Ação', 'Craig Walls', '978-85-7522-890-3', 2016, 'Novatec', 'AVAILABLE', true, NOW(), NOW()),
-('Algoritmos: Teoria e Prática', 'Thomas H. Cormen', '978-85-352-3699-6', 2012, 'Elsevier', 'AVAILABLE', true, NOW(), NOW());
+(NULL, 'Clean Code', 'Robert C. Martin', 'Alta Books', '2008', '8575229016', '978-85-7522-901-6', 'Manual sobre como escrever código limpo, legível e sustentável para desenvolvedores.', NULL, 464, 'AVAILABLE', true, NOW(), NOW()),
+
+(NULL, 'Java: Como Programar', 'Paul Deitel, Harvey Deitel', 'Pearson', '2017', '8543023489', '978-85-430-2348-9', 'Livro abrangente sobre programação Java, cobrindo desde conceitos básicos até tópicos avançados.', NULL, 1152, 'LOANED', true, NOW(), NOW()),
+
+(NULL, 'Padrões de Projetos', 'Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides', 'Bookman', '1994', '8575225674', '978-85-7522-567-4', 'Catálogo de 23 padrões de design essenciais para desenvolvimento de software orientado a objetos.', NULL, 395, 'AVAILABLE', true, NOW(), NOW()),
+
+(NULL, 'Spring Boot em Ação', 'Craig Walls', 'Novatec', '2016', '8575228903', '978-85-7522-890-3', 'Guia prático para desenvolvimento de aplicações Java com Spring Boot framework.', NULL, 320, 'AVAILABLE', true, NOW(), NOW()),
+
+(NULL, 'Algoritmos: Teoria e Prática', 'Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, Clifford Stein', 'Elsevier', '2012', '8535236996', '978-85-352-3699-6', 'Livro de referência sobre algoritmos, estruturas de dados e análise de complexidade.', NULL, 944, 'AVAILABLE', true, NOW(), NOW());
 
 -- =========================================
 -- INSERÇÃO DE EMPRÉSTIMOS
@@ -130,12 +150,17 @@ VALUES
 -- - LOANED: Atualmente emprestado
 -- - UNAVAILABLE: Indisponível (ex: Iracema está inativo)
 
+-- Principais diferenças da nova estrutura:
+-- 1. Campo 'authors' (plural) em vez de 'author' (singular)
+-- 2. Campos separados para ISBN-10 e ISBN-13
+-- 3. Campo 'published_date' como string (compatível com Google Books)
+-- 4. Novos campos: google_books_id, description, thumbnail_url, page_count
+-- 5. Campo 'publisher' em vez de 'publisher_name'
+
 -- Usuários:
--- ID 1-3: admin_master, admin_tech, admin_geral (ADMIN)
--- ID 4-6: bibliotecario1, bibliotecario2, biblio_noite (LIBRARIAN)
--- ID 7-21: mariaclara, carlos123, ana_costa, pedrohenri, juliana_s, rodrigo_dev,
---          fernanda_ui, lucas_gamer, camila_prof, bruno_eng, larissa_med,
---          gabriel_art, patricia_adv, ricardo_chef, isabela_des (USER)
+-- ID 1-3: Administradores (ADMIN)
+-- ID 4-6: Bibliotecários (LIBRARIAN)
+-- ID 7-21: Usuários comuns (USER)
 
 -- Livros com status LOANED:
 -- ID 3: O Pequeno Príncipe (emprestado para Maria Clara - ID 7)

@@ -97,7 +97,7 @@ public class User implements UserDetails {
      */
     @With
     @NotBlank(message = "ENDEREÇO É OBRIGATÓRIO.")
-    @Size(min = 5, max = 50)
+    @Size(min = 5, max = 100)
     @Column(name = "endereco", nullable = false)
     @Schema(description = "ENDEREÇO DO USUÁRIO", example = "LEBLON, N 78")
     private String endereco;

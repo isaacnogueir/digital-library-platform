@@ -1,5 +1,6 @@
-package com.project2025.digital_library_platform.domain.user;
+package com.project2025.digital_library_platform.domain.user.Dtos;
 
+import com.project2025.digital_library_platform.domain.user.Role;
 import lombok.*;
 /**
  * DTO para resposta contendo informações completas de um usuário.

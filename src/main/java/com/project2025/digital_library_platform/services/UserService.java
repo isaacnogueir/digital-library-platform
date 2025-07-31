@@ -2,6 +2,8 @@ package com.project2025.digital_library_platform.services;
 
 import com.project2025.digital_library_platform.converters.UserConverter;
 import com.project2025.digital_library_platform.domain.user.*;
+import com.project2025.digital_library_platform.domain.user.Dtos.UserResponseDTO;
+import com.project2025.digital_library_platform.domain.user.Dtos.UserUpdateDTO;
 import com.project2025.digital_library_platform.exception.BusinessException;
 import com.project2025.digital_library_platform.exception.ErrorCode;
 import com.project2025.digital_library_platform.repositories.UserRepository;

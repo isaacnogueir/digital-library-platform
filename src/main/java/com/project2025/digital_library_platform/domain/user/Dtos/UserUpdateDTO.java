@@ -1,4 +1,4 @@
-package com.project2025.digital_library_platform.domain.user;
+package com.project2025.digital_library_platform.domain.user.Dtos;
 
 public record UserUpdateDTO(
         String nome,

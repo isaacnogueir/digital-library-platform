@@ -2,8 +2,8 @@ package com.project2025.digital_library_platform.converters;
 
 import com.project2025.digital_library_platform.domain.loginDTO.RegisterDTO;
 import com.project2025.digital_library_platform.domain.user.User;
-import com.project2025.digital_library_platform.domain.user.UserResponseDTO;
-import com.project2025.digital_library_platform.domain.user.UserUpdateDTO;
+import com.project2025.digital_library_platform.domain.user.Dtos.UserResponseDTO;
+import com.project2025.digital_library_platform.domain.user.Dtos.UserUpdateDTO;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
