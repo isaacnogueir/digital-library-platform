@@ -18,7 +18,7 @@ import java.util.List;
 @SecurityRequirement(name = "bearerAuth")
 @RequiredArgsConstructor
 @Slf4j
-public class GoogleBooksTestController {
+public class GoogleBooksController {
 
     private final GoogleBooksService googleBooksService;
 

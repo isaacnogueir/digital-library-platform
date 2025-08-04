@@ -16,7 +16,7 @@ public class UserConverter {
         this.passwordEncoder = passwordEncoder;
     }
 
-
+    //User para ResponseDto - RETORNA A RESPOSTA
     public UserResponseDTO toDto(User user) {
         return new UserResponseDTO(
                 user.getId(),
@@ -28,6 +28,7 @@ public class UserConverter {
                 user.getRole());
     }
 
+    //RegisterDto para Entity - REGISTER EMPRESTIMO NO BANCO
     public User toEntity(RegisterDTO dto) {
         return User.builder()
                 .login(dto.login())
@@ -40,6 +41,7 @@ public class UserConverter {
                 .build();
     }
 
+    //User, UpdateDto e PassWord para updateDto - REGISTRA UMA ATUALIAZAÇÃO
     public void updateFromDto(User user, UserUpdateDTO dto, PasswordEncoder encoder) {
         user.setLogin(dto.login());
         user.setPassword(encoder.encode(dto.password()));
@@ -48,12 +50,4 @@ public class UserConverter {
         user.setEndereco(dto.endereco());
         user.setTelefone(dto.telefone());
     }
-
-/*
-    public List<UserResponseDTO> converterLista(List<User> users) {
-        return users.stream()
-                .map(this::toDto)
-                .collect(Collectors.toList());
-    }
-*/
 }

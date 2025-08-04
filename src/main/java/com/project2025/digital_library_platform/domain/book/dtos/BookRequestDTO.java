@@ -17,23 +17,21 @@ public class BookRequestDTO {
     @NotBlank(message = "Título é necessário.")
     private String title;
 
-    private String authors; // Mudou de author para authors
+    private String authors;
 
-    private String isbn10; // Separado em dois campos
+    private String isbn10;
 
     private String isbn13;
 
-    private String publishedDate; // Mudou de publicationYear para publishedDate
+    private String publishedDate;
 
-    private String publisher; // Mudou de publisherName para publisher
+    private String publisher;
 
-    private String description; // Novo campo
+    private String description;
 
-    private String thumbnailUrl; // Novo campo
+    private Integer pageCount;
 
-    private Integer pageCount; // Novo campo
-
-    private String googleBooksId; // Novo campo
+    private String googleBooksId;
 
     @NotNull(message = "Status é necessário.")
     private Status status;

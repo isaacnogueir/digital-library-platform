@@ -7,7 +7,6 @@ public record GoogleBookSelectionDTO (
             String publisher,
             String publishedDate,
             String description,
-            String thumbnailUrl,
             String isbn10,
             String isbn13,
             Integer pageCount

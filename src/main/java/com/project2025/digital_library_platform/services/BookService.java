@@ -56,7 +56,6 @@ public class BookService {
     public BookResponseDTO updateBook(Long id, BookUpdateDTO bookUpdateDTO) {
         var existingBook = findBookById(id);
         validateBookUpdate(existingBook, bookUpdateDTO);
-
         bookConverter.updateFromDto(existingBook, bookUpdateDTO);
 
         var updatedBook = bookRepository.save(existingBook);

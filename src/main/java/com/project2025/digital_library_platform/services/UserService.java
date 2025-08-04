@@ -43,11 +43,11 @@ public class UserService {
     /**
      * Atualiza o perfil do usuário logado
      *
-     * @param user usuário logado
+     * @param id, userUpdateDto
      * @return UserResponseDTO com dados atualizados
      */
     @Transactional
-    @Operation(description = "Atualiza o perfil do usuário logado")
+    @Operation(description = "Atualiza perfil")
     public UserResponseDTO updateProfile(Long id, UserUpdateDTO userUpdateDTO) {
         User existingUser = findUserById(id);
         validateUserUpdate(existingUser, userUpdateDTO);
@@ -107,6 +107,7 @@ public class UserService {
     public List<UserResponseDTO> findActiveUsers() {
         return userRepository.findByActiveTrue()
                 .stream()
+                .filter(User::isActive)
                 .map(userConverter::toDto)
                 .toList();
     }

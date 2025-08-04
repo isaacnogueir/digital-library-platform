@@ -17,17 +17,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class GoogleBookConverter {
 
-    public List<GoogleBookSelectionDTO> toSelectionDtoList(GoogleBooksResponseDTO response) {
-        if (response == null || response.getItems() == null) {
-            return Collections.emptyList();
-        }
-
-        return response.getItems().stream()
-                .map(this::toSelectionDto)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
-    }
-
+    //Um item de GooleResponseDto PARA GooleBookSelection
     public GoogleBookSelectionDTO toSelectionDto(GoogleBooksResponseDTO.GoogleBookItemDto item) {
         if (item == null || item.getVolumeInfo() == null) {
             return null;
@@ -37,10 +27,6 @@ public class GoogleBookConverter {
 
         String isbn10 = extractIsbn(volume, "ISBN_10");
         String isbn13 = extractIsbn(volume, "ISBN_13");
-
-        String thumbnail = Optional.ofNullable(volume.getImageLinks())
-                .map(GoogleBooksResponseDTO.ImageLinkDto::getThumbnail)
-                .orElse(null);
 
         String authors = Optional.ofNullable(volume.getAuthors())
                 .filter(list -> !list.isEmpty())
@@ -54,7 +40,6 @@ public class GoogleBookConverter {
                 volume.getPublisher(),
                 volume.getPublishedDate(),
                 volume.getDescription(),
-                thumbnail,
                 isbn10,
                 isbn13,
                 volume.getPageCount()
@@ -62,19 +47,31 @@ public class GoogleBookConverter {
 
     }
 
+    //GoogleResponse Dto par Lista
+    public List<GoogleBookSelectionDTO> toSelectionDtoList(GoogleBooksResponseDTO response) {
+        if (response == null || response.getItems() == null) {
+            return Collections.emptyList();
+        }
+
+        return response.getItems().stream()
+                .map(this::toSelectionDto)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+
+    //GoogleBookSelectionDTO para BookCreateDTO
     public BookCreateDTO toCreateDto(GoogleBookSelectionDTO googleBook) {
         return new BookCreateDTO(
-                googleBook.title(),              // String title
-                googleBook.authors(),            // String authors
-                googleBook.publisher(),          // String publisher
-                googleBook.publishedDate(),      // String publishedDate (NÃO LocalDate!)
-                googleBook.isbn10(),             // String isbn10 (separado)
-                googleBook.isbn13(),             // String isbn13 (separado)
-                googleBook.description(),        // String description
-                googleBook.thumbnailUrl(),       // String thumbnailUrl
-                googleBook.pageCount(),          // Integer pageCount
-                googleBook.googleBooksId(),      // String googleBooksId
-                Status.AVAILABLE                 // Status status (obrigatório!)
+                googleBook.title(),
+                googleBook.authors(),
+                googleBook.publisher(),
+                googleBook.publishedDate(),
+                googleBook.isbn10(),
+                googleBook.isbn13(),
+                googleBook.description(),
+                googleBook.pageCount(),
+                googleBook.googleBooksId(),
+                Status.AVAILABLE
         );
     }
 

@@ -13,7 +13,6 @@ public record BookCreateDTO(
         String isbn10,
         String isbn13,
         String description,
-        String thumbnailUrl,
         Integer pageCount,
         String googleBooksId,
         @NotNull(message = "Status é obrigatório")

@@ -243,11 +243,6 @@ public class Book {
             }
         }
 
-        // Capa do livro
-        if (volumeInfo.getImageLinks() != null) {
-            this.thumbnailUrl = volumeInfo.getImageLinks().getThumbnail();
-        }
-
         // Definir como ativo e disponível por padrão
         this.active = true;
         this.status = Status.AVAILABLE;

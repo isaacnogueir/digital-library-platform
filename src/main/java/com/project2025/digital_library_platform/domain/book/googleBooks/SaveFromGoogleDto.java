@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 public class SaveFromGoogleDto {
 
     private String googleBookId;
-    private String query;
-    private Boolean overrideifExists;
+    private Boolean overRideIfExists;
 
 }

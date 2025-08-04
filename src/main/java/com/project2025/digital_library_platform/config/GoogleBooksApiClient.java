@@ -1,4 +1,4 @@
-package com.project2025.digital_library_platform.client;
+package com.project2025.digital_library_platform.config;
 
 import com.project2025.digital_library_platform.domain.book.googleBooks.GoogleBookSelectionDTO;
 import com.project2025.digital_library_platform.domain.book.googleBooks.GoogleBooksResponseDTO;
@@ -28,7 +28,7 @@ public class GoogleBooksApiClient {
                     .get()
                     .uri(uriBuilder -> uriBuilder
                             .queryParam("q", query)
-                            .queryParam("maxResults", 5)
+                            .queryParam("maxResults", 10)
                             .queryParam("printType", "books") // ← CORRIGIDO: era "PrintType"
                             .build())
                     .retrieve()
@@ -78,10 +78,6 @@ public class GoogleBooksApiClient {
         String isbn10 = extractIsbn(volumeInfo, "ISBN_10");
         String isbn13 = extractIsbn(volumeInfo, "ISBN_13");
 
-        String thumbnailUrl = Optional.ofNullable(volumeInfo.getImageLinks())
-                .map(GoogleBooksResponseDTO.ImageLinkDto::getThumbnail)
-                .orElse(null);
-
         String authors = Optional.ofNullable(volumeInfo.getAuthors())
                 .filter(list -> !list.isEmpty())
                 .map(list -> String.join(", ", list))
@@ -94,7 +90,6 @@ public class GoogleBooksApiClient {
                 volumeInfo.getPublisher(),
                 volumeInfo.getPublishedDate(),
                 volumeInfo.getDescription(),
-                thumbnailUrl,
                 isbn10,
                 isbn13,
                 volumeInfo.getPageCount()

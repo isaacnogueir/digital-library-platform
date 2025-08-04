@@ -17,7 +17,6 @@ public class BookResponseDTO {
     private String isbn10;
     private String isbn13;
     private String description;
-    private String thumbnailUrl;
     private Integer pageCount;
     private Status status;
     private boolean active;

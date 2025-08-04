@@ -23,6 +23,13 @@ public class GoogleBooksResponseDTO {
 
     @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class IndustryIdentifierDto {
+        private String type;
+        private String identifier;
+    }
+
+    @Data
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class VolumeInfoDto {
         private String title;
         private List<String> authors;
@@ -31,20 +38,6 @@ public class GoogleBooksResponseDTO {
         private String description;
         private Integer pageCount;
         private List<IndustryIdentifierDto> industryIdentifiers;
-        private ImageLinkDto imageLinks;
-    }
-
-    @Data
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class IndustryIdentifierDto {
-        private String type;
-        private String identifier;
-    }
-
-    @Data
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class ImageLinkDto {
-        private String thumbnail;
     }
 
 }

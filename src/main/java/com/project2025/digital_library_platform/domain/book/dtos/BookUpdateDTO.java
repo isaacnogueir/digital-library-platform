@@ -11,6 +11,5 @@ public record BookUpdateDTO(
         String isbn10,
         String isbn13,
         String description,
-        String thumbnailUrl,
         Integer pageCount
 ) {}
