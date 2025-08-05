@@ -108,22 +108,27 @@ public class BookService {
         return bookConverter.converterList(availableBooks);
     }
 
-    // ===== MÉTODOS DE VALIDAÇÃO CORRIGIDOS =====
+    // ===== MÉTODOS DE VALIDAÇÃO  =====
 
-    /**
+    /**b
      * Valida se um livro pode ser criado
      */
     private void validateBookCreation(BookCreateDTO bookCreateDTO) {
+
+        if (bookCreateDTO.title() == null || bookCreateDTO.title().trim().isEmpty()) {
+            throw new BusinessException("Título é obrigatório", ErrorCode.BOOK_ALREADY_EXISTS);
+        }
+
         // Valida ISBN-10 se fornecido
         if (bookCreateDTO.isbn10() != null && !bookCreateDTO.isbn10().isEmpty()) {
-            if (existsByIsbn10(bookCreateDTO.isbn10())) {
+            if (bookRepository.existsByIsbn10(bookCreateDTO.isbn10())) {
                 throw new BusinessException("Livro com este ISBN-10 já cadastrado!", ErrorCode.BOOK_ALREADY_EXISTS);
             }
         }
 
         // Valida ISBN-13 se fornecido
         if (bookCreateDTO.isbn13() != null && !bookCreateDTO.isbn13().isEmpty()) {
-            if (existsByIsbn13(bookCreateDTO.isbn13())) {
+            if (bookRepository.existsByIsbn13(bookCreateDTO.isbn13())) {
                 throw new BusinessException("Livro com este ISBN-13 já cadastrado!", ErrorCode.BOOK_ALREADY_EXISTS);
             }
         }
@@ -165,7 +170,7 @@ public class BookService {
         }
     }
 
-    // ===== MÉTODOS AUXILIARES CORRIGIDOS =====
+    // ===== MÉTODOS AUXILIARES  =====
 
     private Book findBookById(Long id) {
         return bookRepository.findById(id)
