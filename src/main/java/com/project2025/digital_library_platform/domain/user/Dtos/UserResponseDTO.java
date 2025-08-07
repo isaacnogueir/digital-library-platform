@@ -6,6 +6,7 @@ import lombok.*;
  * DTO para resposta contendo informações completas de um usuário.
  */
 
+@Data
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,5 +20,6 @@ public class UserResponseDTO {
     private String endereco;
     private String telefone;
     private Role role;
+    private Boolean active;
 
 }

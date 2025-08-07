@@ -39,4 +39,6 @@ public class UserRequestDTO {
 
     private Role role;
 
+    private Boolean active;
+
 }

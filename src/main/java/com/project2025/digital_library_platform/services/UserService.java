@@ -37,6 +37,7 @@ public class UserService {
      */
     @Operation(description = "Obtém o perfil do usuário logado")
     public UserResponseDTO getProfile(User user) {
+
         return userConverter.toDto(user);
     }
 

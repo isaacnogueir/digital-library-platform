@@ -9,7 +9,6 @@ import com.project2025.digital_library_platform.domain.book.dtos.BookUpdateDTO;
 import com.project2025.digital_library_platform.events.BookCreatedEvent;
 import com.project2025.digital_library_platform.exception.BusinessException;
 import com.project2025.digital_library_platform.repositories.BookRepository;
-import org.hibernate.dialect.function.array.ArrayGetUnnestFunction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,7 +29,8 @@ import java.util.Optional;
 
 import static com.project2025.digital_library_platform.domain.book.Status.AVAILABLE;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -45,6 +45,8 @@ class BookServiceTest {
 
     @InjectMocks
     private BookService bookService;
+
+    // =============== DADOS DE ENTRADA ===============
 
     private BookCreateDTO bookCreateDTO;
     private BookUpdateDTO bookUpdateDTO;
@@ -222,7 +224,7 @@ class BookServiceTest {
         assertThat(capturedEvent)
                 .isNotNull()
                 .satisfies(event ->
-                    assertThat(event.getBookId()).isEqualTo(1L)
+                        assertThat(event.getBookId()).isEqualTo(1L)
                 );
 
         System.out.println("✅ Captura de evento executada COM SUCESSO!");

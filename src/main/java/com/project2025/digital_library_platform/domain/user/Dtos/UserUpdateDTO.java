@@ -6,4 +6,5 @@ public record UserUpdateDTO(
         String password,
         String email,
         String endereco,
-        String telefone){}
+        String telefone
+){}

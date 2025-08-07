@@ -25,7 +25,8 @@ public class UserConverter {
                 user.getEmail(),
                 user.getEndereco(),
                 user.getTelefone(),
-                user.getRole());
+                user.getRole(),
+                user.isActive());
     }
 
     //RegisterDto para Entity - REGISTER EMPRESTIMO NO BANCO
