@@ -225,7 +225,7 @@ class UserServiceTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"testador", "testuser", "TESTUSER", "TestUser", "test", "user"})
-    @DisplayName("Deve retornar todos os usuários")
+    @DisplayName("Deve buscar por um login")
     void findLogin_WhenValidLogin_ShouldReturnUser(String login) {
         //ARRANGE
         when(userRepository.findByLogin(login)).thenReturn(Optional.of(user));
@@ -279,7 +279,7 @@ class UserServiceTest {
     @DisplayName("Deve retornar usuárior por Role")
     void findUsersByRole_ReturnUserByRole() {
         //ARRANGE
-        List<User> adminusers = Arrays.asList(
+        List<User> adminUsers = Arrays.asList(
                 createTestUser(1L, "teste1", "senha1", "Teste Um", "teste1@email.com", "Endereço 1", "111111111", Role.ADMIN, true),
                 createTestUser(2L, "teste2", "senha2", "Teste Dois", "teste2@email.com", "Endereço 2", "222222222", Role.ADMIN, true)
         );
@@ -289,9 +289,9 @@ class UserServiceTest {
                 createTestUserResponseDTO(2L, "teste2", "Teste Dois", "teste2@email.com", "Endereço 2", "222222222", Role.ADMIN, true)
         );
 
-        when(userRepository.findByRole(Role.ADMIN)).thenReturn(adminusers);
-        when(userConverter.toDto(adminusers.get(0))).thenReturn(expectedDTOs.get(0));
-        when(userConverter.toDto(adminusers.get(1))).thenReturn(expectedDTOs.get(1));
+        when(userRepository.findByRole(Role.ADMIN)).thenReturn(adminUsers);
+        when(userConverter.toDto(adminUsers.get(0))).thenReturn(expectedDTOs.get(0));
+        when(userConverter.toDto(adminUsers.get(1))).thenReturn(expectedDTOs.get(1));
 
         //ACT
         List<UserResponseDTO> result = userService.findUsersByRole(Role.ADMIN);
@@ -310,7 +310,7 @@ class UserServiceTest {
     @DisplayName("Deve retornar apenas usuários ativos")
     void findActiveUsers_ReturnOnlyActive() {
         //ARRANGE
-        List<User> activeusers = Arrays.asList(
+        List<User> activeUsers = Arrays.asList(
                 createTestUser(1L, "teste1", "senha1", "Teste Um", "teste1@email.com", "Endereço 1", "111111111", Role.ADMIN, true),
                 createTestUser(2L, "teste2", "senha2", "Teste Dois", "teste2@email.com", "Endereço 2", "222222222", Role.ADMIN, true)
         );
@@ -320,9 +320,9 @@ class UserServiceTest {
                 createTestUserResponseDTO(2L, "teste2", "Teste Dois", "teste2@email.com", "Endereço 2", "222222222", Role.ADMIN, true)
         );
 
-        when(userRepository.findByActiveTrue()).thenReturn(activeusers);
-        when(userConverter.toDto(activeusers.get(0))).thenReturn(expectedDTOs.get(0));
-        when(userConverter.toDto(activeusers.get(1))).thenReturn(expectedDTOs.get(1));
+        when(userRepository.findByActiveTrue()).thenReturn(activeUsers);
+        when(userConverter.toDto(activeUsers.get(0))).thenReturn(expectedDTOs.get(0));
+        when(userConverter.toDto(activeUsers.get(1))).thenReturn(expectedDTOs.get(1));
 
         //ACT
         List<UserResponseDTO> result = userService.findActiveUsers();

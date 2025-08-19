@@ -169,6 +169,7 @@ public class UserService {
      */
     @Operation(description = "Verifica se um usuário existe por ID")
     public boolean existsById(Long id) {
+
         return userRepository.existsById(id);
     }
 
@@ -180,6 +181,7 @@ public class UserService {
      */
     @Operation(description = "Verifica se existe um usuário com o email informado")
     public boolean existsByEmail(String email) {
+
         return userRepository.existsByEmail(email);
     }
 
@@ -191,6 +193,7 @@ public class UserService {
      */
     @Operation(description = "Verifica se existe um usuário com o login informado")
     public boolean existsByLogin(String login) {
+
         return userRepository.existsByLogin(login);
     }
 

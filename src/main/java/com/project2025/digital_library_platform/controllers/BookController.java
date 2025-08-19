@@ -80,6 +80,7 @@ public class BookController {
     })
     @PreAuthorize("hasAnyRole('ADMIN', 'LIBRARIAN')")
     public ResponseEntity<BookResponseDTO> findByIsbn(@PathVariable String isbn) {
+        String normalizedIsbn = isbn.replaceAll("[-\\s]", "");
         BookResponseDTO book = bookService.findByIsbn(isbn);
         return ResponseEntity.ok(book);
     }
@@ -91,8 +92,8 @@ public class BookController {
             @ApiResponse(responseCode = "404", description = "Livro não encontrado")
     })
     @PreAuthorize("hasAnyRole('ADMIN', 'LIBRARIAN')")
-    public ResponseEntity<BookResponseDTO> findByTitle(@PathVariable String title) {
-        BookResponseDTO book = bookService.findByTitle(title);
+    public ResponseEntity<List<BookResponseDTO>> findByTitle(@PathVariable String title) {
+        List<BookResponseDTO> book = bookService.findByTitle(title);
         return ResponseEntity.ok(book);
     }
 

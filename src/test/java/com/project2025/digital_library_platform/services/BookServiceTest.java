@@ -316,16 +316,17 @@ class BookServiceTest {
     @DisplayName("Deve buscar um livro por título")
     void findByTitle_WhenValidTitle_ShouldReturnBook(String title) {
         // ARRANGE
-        when(bookRepository.findByTitleContainingIgnoreCase(title)).thenReturn(Optional.of(book));
+        when(bookRepository.findByTitleContainingIgnoreCase(title)).thenReturn(List.of(book));
         when(bookConverter.toDto(book)).thenReturn(bookResponseDTO);
 
         // ACT
-        BookResponseDTO result = bookService.findByTitle(title);
+        List<BookResponseDTO> result = bookService.findByTitle(title);
 
         // ASSERT
         assertThat(result)
                 .isNotNull()
-                .satisfies(response -> {
+                .hasSize(1)
+                .allSatisfy(response -> {
                     assertThat(response.getId()).isEqualTo(1L);
                     assertThat(response.getTitle()).isEqualTo("As Walkírias");
                 });

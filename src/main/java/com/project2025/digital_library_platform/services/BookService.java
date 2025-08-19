@@ -15,6 +15,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BookService {
@@ -73,7 +74,6 @@ public class BookService {
         return bookConverter.toDto(book);
     }
 
-    // CORRIGIDO - Agora busca por ISBN-10 OU ISBN-13
     @Operation(description = "Buscar um livro por ISBN")
     public BookResponseDTO findByIsbn(String isbn) {
         return bookRepository.findByIsbn10OrIsbn13(isbn, isbn)
@@ -82,10 +82,13 @@ public class BookService {
     }
 
     @Operation(description = "Buscar por título")
-    public BookResponseDTO findByTitle(String title) {
-        return bookRepository.findByTitleContainingIgnoreCase(title)
-                .map(bookConverter::toDto)
-                .orElseThrow(() -> new BusinessException("Livro não encontrado", ErrorCode.BOOK_NOT_FOUND));
+    public List<BookResponseDTO> findByTitle(String title) {
+       List<Book> livros = bookRepository.findByTitleContainingIgnoreCase(title);
+       if(livros.isEmpty()){
+           throw new BusinessException("Livro não encontrado", ErrorCode.BOOK_NOT_FOUND);
+       }
+       return livros.stream().map(bookConverter::toDto)
+               .collect(Collectors.toList());
     }
 
     /**

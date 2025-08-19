@@ -63,7 +63,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
      *
      * @param title título ou parte do título do livro
      */
-    Optional<Book> findByTitleContainingIgnoreCase(String title);
+    List<Book> findByTitleContainingIgnoreCase(String title);
 
     /**
      * Busca livros por nome da editora - case insensitive e containing

@@ -20,7 +20,16 @@ public class CustomUserDetailsService implements UserDetailsService {
     // Metodo usado pelo AuthenticationManager para autenticar o usuário no login
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByLogin(username).orElseThrow(
-                () -> new BusinessException("Usuário não encontrado", ErrorCode.USER_NOT_FOUND));
+        User user = userRepository.findByLogin(username)
+                .orElseThrow(()-> new UsernameNotFoundException("Usuário não encontrado!"+ username));
+
+    return org.springframework.security.core.userdetails.User.builder()
+            .username(user.getLogin())
+            .password(user.getPassword())
+            .authorities("ROLE_USER")
+            .build();
+
+       /* return userRepository.findByLogin(username).orElseThrow(
+                () -> new BusinessException("Usuário não encontrado", ErrorCode.USER_NOT_FOUND)); */
     }
 }

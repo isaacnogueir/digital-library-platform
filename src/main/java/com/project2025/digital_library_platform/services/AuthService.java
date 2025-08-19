@@ -83,10 +83,17 @@ public class AuthService {
                     new UsernamePasswordAuthenticationToken(loginDTO.login(), loginDTO.password())
             );
 
-            User user = (User) authentication.getPrincipal();
-            String token = tokenService.generateToken(user);
+            org.springframework.security.core.userdetails.User userDetails =
+                    (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
 
-            return new LoginResponseDTO(token, user.getRole());
+            User user = userRepository.findByLogin(userDetails.getUsername())
+                    .orElseThrow(() -> new BusinessException("Usuário não encontrado", ErrorCode.USER_NOT_FOUND));
+
+           String token = tokenService.generateToken(userDetails.getUsername());
+
+           String role = "ROLE_" + user.getRole().name();
+
+            return new LoginResponseDTO(token,role);
         } catch (AuthenticationException ex) {
             throw new BusinessException("Credenciais inválidas", ErrorCode.INVALID_CREDENTIALS);
         }

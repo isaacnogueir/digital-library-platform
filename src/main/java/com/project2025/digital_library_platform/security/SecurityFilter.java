@@ -30,9 +30,11 @@ public class SecurityFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String path = request.getServletPath();
+        System.out.println("SecurityFilter - Path: " + path);
 
-        // Ignora o filtro para rotas públicas
-        if (path.equals("/auth/login") || path.equals("/auth/register")) {
+        // 🔹 MODIFICADO: Ignorar todas as rotas públicas de /auth/** para permitir registro e login
+        if (path.startsWith("/auth/")) {
+            System.out.println("Ignorando filtro para: " + path);
             filterChain.doFilter(request, response);
             return;
         }
@@ -42,12 +44,11 @@ public class SecurityFilter extends OncePerRequestFilter {
         if (token != null) {
             String login = tokenService.validateToken(token);
 
-            // Só tenta autenticar se o login retornado for válido
             if (login != null && !login.isBlank()) {
                 Optional<User> optionalUser = userRepository.findByLogin(login);
 
                 if (optionalUser.isPresent()) {
-                    UserDetails user = optionalUser.get(); // pega o User do Optional
+                    UserDetails user = optionalUser.get();
                     UsernamePasswordAuthenticationToken auth =
                             new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
                     SecurityContextHolder.getContext().setAuthentication(auth);
@@ -55,11 +56,9 @@ public class SecurityFilter extends OncePerRequestFilter {
             }
         }
 
-        // Segue a cadeia de filtros
         filterChain.doFilter(request, response);
     }
 
-    // Extrai o token do header Authorization
     private String recoverToken(HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
         if (authHeader == null || !authHeader.startsWith("Bearer ")) return null;

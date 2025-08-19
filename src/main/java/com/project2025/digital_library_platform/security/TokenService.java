@@ -4,7 +4,6 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 
-import com.project2025.digital_library_platform.domain.user.User;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -18,10 +17,10 @@ public class TokenService {
     private static final String secret = "meu-segredo";
 
     // Gera um token com login do usuário e validade de 2 horas
-    public String generateToken(User user) {
+    public String generateToken(String username) {
         return JWT.create()
                 .withIssuer("auth-api") // Identificador da aplicação que gerou o token
-                .withSubject(user.getLogin()) // Quem é o "dono" do token (login)
+                .withSubject(username) // Quem é o "dono" do token (login)
                 .withExpiresAt(generateExpirationDate()) // Data de expiração
                 .sign(Algorithm.HMAC256(secret)); // Algoritmo de assinatura
     }
