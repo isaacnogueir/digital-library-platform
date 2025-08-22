@@ -8,7 +8,7 @@ import com.project2025.digital_library_platform.domain.book.googleBooks.GoogleBo
 import com.project2025.digital_library_platform.domain.book.googleBooks.SaveFromGoogleDto;
 import com.project2025.digital_library_platform.exception.BusinessException;
 import com.project2025.digital_library_platform.exception.ErrorCode;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

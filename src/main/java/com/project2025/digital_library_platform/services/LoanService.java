@@ -14,7 +14,7 @@ import com.project2025.digital_library_platform.repositories.BookRepository;
 import com.project2025.digital_library_platform.repositories.LoanRepository;
 import com.project2025.digital_library_platform.repositories.UserRepository;
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 

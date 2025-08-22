@@ -10,7 +10,7 @@ import com.project2025.digital_library_platform.exception.BusinessException;
 import com.project2025.digital_library_platform.exception.ErrorCode;
 import com.project2025.digital_library_platform.repositories.BookRepository;
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 

@@ -11,7 +11,7 @@ import com.project2025.digital_library_platform.exception.ErrorCode;
 import com.project2025.digital_library_platform.repositories.UserRepository;
 import com.project2025.digital_library_platform.security.TokenService;
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

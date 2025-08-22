@@ -75,7 +75,6 @@ public class LoanController {
         return ResponseEntity.ok(list);
     }
 
-
     @GetMapping("findByUser/{id}")
     @Operation(summary = "Buscar empréstimos por ID", description = "Buscar empréstimos por id do usuário")
     @PreAuthorize("hasAnyRole('ADMIN','LIBRARIAN')")
@@ -83,6 +82,4 @@ public class LoanController {
         LoanResponseDTO loan = loanService.findLoanById(id);
         return ResponseEntity.ok(loan);
     }
-
-
 }

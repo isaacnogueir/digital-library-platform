@@ -1,9 +1,7 @@
--- Remover tabelas existentes (cuidado com foreign keys)
 DROP TABLE IF EXISTS loans;
 DROP TABLE IF EXISTS books;
 DROP TABLE IF EXISTS users;
 
--- Recriar tabela users (mantendo a original)
 CREATE TABLE users (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     login VARCHAR(20) NOT NULL UNIQUE,
@@ -18,11 +16,9 @@ CREATE TABLE users (
     updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Nova tabela books baseada na sua entidade
 CREATE TABLE books (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
 
-    -- Campos do Google Books
     google_books_id VARCHAR(255) UNIQUE,
     title VARCHAR(255) NOT NULL,
     authors TEXT,
@@ -34,16 +30,13 @@ CREATE TABLE books (
     thumbnail_url VARCHAR(500),
     page_count INTEGER,
 
-    -- Campos específicos da biblioteca
     status VARCHAR(20) NOT NULL DEFAULT 'AVAILABLE' CHECK (status IN ('AVAILABLE', 'LOANED', 'UNAVAILABLE')),
     active BOOLEAN NOT NULL DEFAULT TRUE,
 
-    -- Campos de auditoria
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Tabela de empréstimos (mantendo a original)
 CREATE TABLE loans (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     loan_date TIMESTAMP NOT NULL,
@@ -55,12 +48,10 @@ CREATE TABLE loans (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
-    -- Foreign Keys
     CONSTRAINT fk_loan_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE RESTRICT,
     CONSTRAINT fk_loan_book FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE RESTRICT
 );
 
--- Índices para otimização
 CREATE INDEX idx_user_email ON users(email);
 CREATE INDEX idx_user_role ON users(role);
 CREATE INDEX idx_user_active ON users(active);
