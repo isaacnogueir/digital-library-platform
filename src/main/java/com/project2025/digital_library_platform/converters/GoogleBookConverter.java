@@ -1,9 +1,9 @@
 package com.project2025.digital_library_platform.converters;
 
-import com.project2025.digital_library_platform.domain.book.Status;
-import com.project2025.digital_library_platform.domain.book.dtos.BookCreateDTO;
-import com.project2025.digital_library_platform.domain.book.googleBooks.GoogleBookSelectionDTO;
-import com.project2025.digital_library_platform.domain.book.googleBooks.GoogleBooksResponseDTO;
+import com.project2025.digital_library_platform.entity.book.Status;
+import com.project2025.digital_library_platform.DTOs.bookDtos.BookCreateDTO;
+import com.project2025.digital_library_platform.DTOs.googleBooksDtos.GoogleBookSelectionDTO;
+import com.project2025.digital_library_platform.DTOs.googleBooksDtos.GoogleBooksResponseDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class GoogleBookConverter {
 
-    //Um item de GooleResponseDto PARA GooleBookSelection
     public GoogleBookSelectionDTO toSelectionDto(GoogleBooksResponseDTO.GoogleBookItemDto item) {
         if (item == null || item.getVolumeInfo() == null) {
             return null;
@@ -59,7 +58,7 @@ public class GoogleBookConverter {
                 .collect(Collectors.toList());
     }
 
-    //GoogleBookSelectionDTO para BookCreateDTO
+
     public BookCreateDTO toCreateDto(GoogleBookSelectionDTO googleBook) {
         return new BookCreateDTO(
                 googleBook.title(),

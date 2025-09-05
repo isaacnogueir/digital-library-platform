@@ -1,11 +1,11 @@
 package com.project2025.digital_library_platform.services;
 
 import com.project2025.digital_library_platform.converters.GoogleBookConverter;
-import com.project2025.digital_library_platform.domain.book.dtos.BookCreateDTO;
-import com.project2025.digital_library_platform.domain.book.dtos.BookResponseDTO;
-import com.project2025.digital_library_platform.domain.book.googleBooks.GoogleBookSelectionDTO;
-import com.project2025.digital_library_platform.domain.book.googleBooks.GoogleBooksResponseDTO;
-import com.project2025.digital_library_platform.domain.book.googleBooks.SaveFromGoogleDto;
+import com.project2025.digital_library_platform.DTOs.bookDtos.BookCreateDTO;
+import com.project2025.digital_library_platform.DTOs.bookDtos.BookResponseDTO;
+import com.project2025.digital_library_platform.DTOs.googleBooksDtos.GoogleBookSelectionDTO;
+import com.project2025.digital_library_platform.DTOs.googleBooksDtos.GoogleBooksResponseDTO;
+import com.project2025.digital_library_platform.DTOs.googleBooksDtos.SaveFromGoogleDto;
 import com.project2025.digital_library_platform.exception.BusinessException;
 import com.project2025.digital_library_platform.exception.ErrorCode;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +26,7 @@ public class GoogleBooksService {
     private final BookService bookService;
     private final GoogleBookConverter googleBookConverter;
 
-    // ==== METODO PRINCIAIS ====
+    // ==== METODO PRINCIPAIS ====
 
     public List<GoogleBookSelectionDTO> seacherBooksSync(String query) {
         GoogleBooksResponseDTO response = googleBooksWebClient.get()

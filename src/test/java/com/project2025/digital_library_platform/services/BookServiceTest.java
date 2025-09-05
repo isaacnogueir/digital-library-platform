@@ -1,13 +1,13 @@
 package com.project2025.digital_library_platform.services;
 
-import com.project2025.digital_library_platform.converters.BookConverter;
-import com.project2025.digital_library_platform.domain.book.Book;
-import com.project2025.digital_library_platform.domain.book.Status;
-import com.project2025.digital_library_platform.domain.book.dtos.BookCreateDTO;
-import com.project2025.digital_library_platform.domain.book.dtos.BookResponseDTO;
-import com.project2025.digital_library_platform.domain.book.dtos.BookUpdateDTO;
+import com.project2025.digital_library_platform.entity.book.Book;
+import com.project2025.digital_library_platform.entity.book.Status;
+import com.project2025.digital_library_platform.DTOs.bookDtos.BookCreateDTO;
+import com.project2025.digital_library_platform.DTOs.bookDtos.BookResponseDTO;
+import com.project2025.digital_library_platform.DTOs.bookDtos.BookUpdateDTO;
 import com.project2025.digital_library_platform.events.BookCreatedEvent;
 import com.project2025.digital_library_platform.exception.BusinessException;
+import com.project2025.digital_library_platform.mappers.BookMapper;
 import com.project2025.digital_library_platform.repositories.BookRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -27,7 +27,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static com.project2025.digital_library_platform.domain.book.Status.AVAILABLE;
+import static com.project2025.digital_library_platform.entity.book.Status.AVAILABLE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -39,7 +39,7 @@ class BookServiceTest {
     @Mock
     private BookRepository bookRepository;
     @Mock
-    private BookConverter bookConverter;
+    private BookMapper bookMapper;
     @Mock
     private ApplicationEventPublisher eventPublisher;
 
@@ -156,9 +156,9 @@ class BookServiceTest {
     @DisplayName("Deve criar um livro com fluxo completo")
     void createBook_WhenValidData_ShouldExecuteCompleteFlow() {
         // ARRANGE
-        when(bookConverter.toEntity(bookCreateDTO)).thenReturn(book);
+        when(bookMapper.toEntity(bookCreateDTO)).thenReturn(book);
         when(bookRepository.save(book)).thenReturn(book);
-        when(bookConverter.toDto(book)).thenReturn(bookResponseDTO);
+        when(bookMapper.toDto(book)).thenReturn(bookResponseDTO);
 
         // ACT
         BookResponseDTO result = bookService.createBook(bookCreateDTO);
@@ -173,10 +173,10 @@ class BookServiceTest {
                     assertThat(response.getStatus()).isEqualTo(AVAILABLE);
                 });
         //VERIFY
-        verify(bookConverter).toEntity(bookCreateDTO);
+        verify(bookMapper).toEntity(bookCreateDTO);
         verify(bookRepository).save(book);
         verify(eventPublisher).publishEvent(any(BookCreatedEvent.class));
-        verify(bookConverter).toDto(book);
+        verify(bookMapper).toDto(book);
 
         System.out.println("✅ Criação de livro executada COM SUCESSO!");
     }
@@ -185,19 +185,19 @@ class BookServiceTest {
     @DisplayName("Verifica ordem de execução na criação")
     void createBook_ShouldExecuteCorrectOrder() {
         // ARRANGE
-        when(bookConverter.toEntity(bookCreateDTO)).thenReturn(book);
+        when(bookMapper.toEntity(bookCreateDTO)).thenReturn(book);
         when(bookRepository.save(any())).thenReturn(book);
-        when(bookConverter.toDto(any())).thenReturn(bookResponseDTO);
+        when(bookMapper.toDto(any())).thenReturn(bookResponseDTO);
 
         // ACT
         bookService.createBook(bookCreateDTO);
 
         //VERIFY
-        InOrder inOrder = inOrder(bookConverter, bookRepository, eventPublisher);
-        inOrder.verify(bookConverter).toEntity(bookCreateDTO);
+        InOrder inOrder = inOrder(bookMapper, bookRepository, eventPublisher);
+        inOrder.verify(bookMapper).toEntity(bookCreateDTO);
         inOrder.verify(bookRepository).save(book);
         inOrder.verify(eventPublisher).publishEvent(any(BookCreatedEvent.class));
-        inOrder.verify(bookConverter).toDto(book);
+        inOrder.verify(bookMapper).toDto(book);
 
         System.out.println("✅ Verificação de ordem executada COM SUCESSO!");
     }
@@ -208,9 +208,9 @@ class BookServiceTest {
         // ARRANGE
         when(bookRepository.existsByIsbn10(any())).thenReturn(false);
         when(bookRepository.existsByIsbn13(any())).thenReturn(false);
-        when(bookConverter.toEntity(any())).thenReturn(book);
+        when(bookMapper.toEntity(any())).thenReturn(book);
         when(bookRepository.save(any())).thenReturn(book);
-        when(bookConverter.toDto(any())).thenReturn(bookResponseDTO);
+        when(bookMapper.toDto(any())).thenReturn(bookResponseDTO);
 
         ArgumentCaptor<BookCreatedEvent> eventCaptor = ArgumentCaptor.forClass(BookCreatedEvent.class);
 
@@ -237,9 +237,9 @@ class BookServiceTest {
     void updateBook_WhenValidData_ShouldExecuteCompleteFlow() {
         // ARRANGE
         when(bookRepository.findById(1L)).thenReturn(Optional.of(book));
-        doNothing().when(bookConverter).updateFromDto(book, bookUpdateDTO);
+        doNothing().when(bookMapper).updateFromDto(book, bookUpdateDTO);
         when(bookRepository.save(book)).thenReturn(book);
-        when(bookConverter.toDto(book)).thenReturn(buildUpdatedBookResponse());
+        when(bookMapper.toDto(book)).thenReturn(buildUpdatedBookResponse());
 
         // ACT
         BookResponseDTO result = bookService.updateBook(1L, bookUpdateDTO);
@@ -252,11 +252,11 @@ class BookServiceTest {
                     assertThat(response.getTitle()).isEqualTo("As Walkírias Uma jornada espiritual");
                 });
 
-        InOrder inOrder = inOrder(bookRepository, bookConverter);
+        InOrder inOrder = inOrder(bookRepository, bookMapper);
         inOrder.verify(bookRepository).findById(1L);
-        inOrder.verify(bookConverter).updateFromDto(book, bookUpdateDTO);
+        inOrder.verify(bookMapper).updateFromDto(book, bookUpdateDTO);
         inOrder.verify(bookRepository).save(book);
-        inOrder.verify(bookConverter).toDto(book);
+        inOrder.verify(bookMapper).toDto(book);
 
         System.out.println("✅ Atualização de livro executada COM SUCESSO!");
     }
@@ -268,7 +268,7 @@ class BookServiceTest {
     void findById_WhenValidId_ShouldReturnBook() {
         // ARRANGE
         when(bookRepository.findById(1L)).thenReturn(Optional.of(book));
-        when(bookConverter.toDto(book)).thenReturn(bookResponseDTO);
+        when(bookMapper.toDto(book)).thenReturn(bookResponseDTO);
 
         // ACT
         BookResponseDTO result = bookService.findById(1L);
@@ -281,9 +281,9 @@ class BookServiceTest {
                     assertThat(response.getTitle()).isEqualTo("As Walkírias");
                 });
 
-        InOrder inOrder = inOrder(bookRepository, bookConverter);
+        InOrder inOrder = inOrder(bookRepository, bookMapper);
         inOrder.verify(bookRepository).findById(1L);
-        inOrder.verify(bookConverter).toDto(book);
+        inOrder.verify(bookMapper).toDto(book);
 
         System.out.println("✅ Busca por ID executada COM SUCESSO!");
     }
@@ -295,7 +295,7 @@ class BookServiceTest {
 
         // ARRANGE
         when(bookRepository.findByIsbn10OrIsbn13(isbn, isbn)).thenReturn(Optional.of(book));
-        when(bookConverter.toDto(book)).thenReturn(bookResponseDTO);
+        when(bookMapper.toDto(book)).thenReturn(bookResponseDTO);
 
         // ACT
         BookResponseDTO result = bookService.findByIsbn(isbn);
@@ -317,7 +317,7 @@ class BookServiceTest {
     void findByTitle_WhenValidTitle_ShouldReturnBook(String title) {
         // ARRANGE
         when(bookRepository.findByTitleContainingIgnoreCase(title)).thenReturn(List.of(book));
-        when(bookConverter.toDto(book)).thenReturn(bookResponseDTO);
+        when(bookMapper.toDto(book)).thenReturn(bookResponseDTO);
 
         // ACT
         List<BookResponseDTO> result = bookService.findByTitle(title);
@@ -349,7 +349,7 @@ class BookServiceTest {
         );
 
         when(bookRepository.findByActiveAndStatus(true, AVAILABLE)).thenReturn(availableBooks);
-        when(bookConverter.converterList(availableBooks)).thenReturn(expectedDTOs);
+        when(bookMapper.toResponseList(availableBooks)).thenReturn(expectedDTOs);
 
         // ACT
         List<BookResponseDTO> result = bookService.findAvailableBooks();

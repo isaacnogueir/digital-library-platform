@@ -1,7 +1,7 @@
 package com.project2025.digital_library_platform.controllers;
 
-import com.project2025.digital_library_platform.domain.loan.Dtos.LoanCreateDTO;
-import com.project2025.digital_library_platform.domain.loan.Dtos.LoanResponseDTO;
+import com.project2025.digital_library_platform.DTOs.loanDtos.LoanCreateDTO;
+import com.project2025.digital_library_platform.DTOs.loanDtos.LoanResponseDTO;
 import com.project2025.digital_library_platform.services.LoanService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;

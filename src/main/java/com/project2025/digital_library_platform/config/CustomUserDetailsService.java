@@ -1,9 +1,7 @@
 package com.project2025.digital_library_platform.config;
 
 
-import com.project2025.digital_library_platform.domain.user.User;
-import com.project2025.digital_library_platform.exception.BusinessException;
-import com.project2025.digital_library_platform.exception.ErrorCode;
+import com.project2025.digital_library_platform.entity.user.User;
 import com.project2025.digital_library_platform.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

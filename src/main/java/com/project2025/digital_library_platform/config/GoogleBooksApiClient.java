@@ -1,7 +1,7 @@
 package com.project2025.digital_library_platform.config;
 
-import com.project2025.digital_library_platform.domain.book.googleBooks.GoogleBookSelectionDTO;
-import com.project2025.digital_library_platform.domain.book.googleBooks.GoogleBooksResponseDTO;
+import com.project2025.digital_library_platform.DTOs.googleBooksDtos.GoogleBookSelectionDTO;
+import com.project2025.digital_library_platform.DTOs.googleBooksDtos.GoogleBooksResponseDTO;
 import com.project2025.digital_library_platform.exception.BusinessException;
 import com.project2025.digital_library_platform.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;

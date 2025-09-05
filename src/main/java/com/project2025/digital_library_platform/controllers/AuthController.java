@@ -1,8 +1,8 @@
 package com.project2025.digital_library_platform.controllers;
 
-import com.project2025.digital_library_platform.domain.loginDTO.LoginDTO;
-import com.project2025.digital_library_platform.domain.loginDTO.LoginResponseDTO;
-import com.project2025.digital_library_platform.domain.loginDTO.RegisterDTO;
+import com.project2025.digital_library_platform.DTOs.loginDTO.LoginDTO;
+import com.project2025.digital_library_platform.DTOs.loginDTO.LoginResponseDTO;
+import com.project2025.digital_library_platform.DTOs.loginDTO.RegisterDTO;
 import com.project2025.digital_library_platform.services.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

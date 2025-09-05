@@ -1,7 +1,8 @@
 package com.project2025.digital_library_platform.security;
 
-import com.project2025.digital_library_platform.domain.user.User;
+import com.project2025.digital_library_platform.entity.user.User;
 import com.project2025.digital_library_platform.repositories.UserRepository;
+import com.project2025.digital_library_platform.services.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,7 +33,6 @@ public class SecurityFilter extends OncePerRequestFilter {
         String path = request.getServletPath();
         System.out.println("SecurityFilter - Path: " + path);
 
-        // 🔹 MODIFICADO: Ignorar todas as rotas públicas de /auth/** para permitir registro e login
         if (path.startsWith("/auth/")) {
             System.out.println("Ignorando filtro para: " + path);
             filterChain.doFilter(request, response);

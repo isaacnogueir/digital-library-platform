@@ -1,8 +1,8 @@
 package com.project2025.digital_library_platform.controllers;
 
-import com.project2025.digital_library_platform.domain.book.dtos.BookResponseDTO;
-import com.project2025.digital_library_platform.domain.book.googleBooks.GoogleBookSelectionDTO;
-import com.project2025.digital_library_platform.domain.book.googleBooks.SaveFromGoogleDto;
+import com.project2025.digital_library_platform.DTOs.bookDtos.BookResponseDTO;
+import com.project2025.digital_library_platform.DTOs.googleBooksDtos.GoogleBookSelectionDTO;
+import com.project2025.digital_library_platform.DTOs.googleBooksDtos.SaveFromGoogleDto;
 import com.project2025.digital_library_platform.services.GoogleBooksService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;

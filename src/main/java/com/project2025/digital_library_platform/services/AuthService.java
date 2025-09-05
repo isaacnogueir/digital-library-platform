@@ -1,15 +1,14 @@
 package com.project2025.digital_library_platform.services;
 
 import com.project2025.digital_library_platform.converters.UserConverter;
-import com.project2025.digital_library_platform.domain.loginDTO.LoginDTO;
-import com.project2025.digital_library_platform.domain.loginDTO.LoginResponseDTO;
-import com.project2025.digital_library_platform.domain.loginDTO.RegisterDTO;
-import com.project2025.digital_library_platform.domain.user.User;
+import com.project2025.digital_library_platform.DTOs.loginDTO.LoginDTO;
+import com.project2025.digital_library_platform.DTOs.loginDTO.LoginResponseDTO;
+import com.project2025.digital_library_platform.DTOs.loginDTO.RegisterDTO;
+import com.project2025.digital_library_platform.entity.user.User;
 import com.project2025.digital_library_platform.events.UserRegisteredEvent;
 import com.project2025.digital_library_platform.exception.BusinessException;
 import com.project2025.digital_library_platform.exception.ErrorCode;
 import com.project2025.digital_library_platform.repositories.UserRepository;
-import com.project2025.digital_library_platform.security.TokenService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.context.ApplicationEventPublisher;
@@ -45,15 +44,9 @@ public class AuthService {
     }
 
 
-    // ===== OPERAÇÕES DE REGISTRO =====
+    // OPERAÇÕES DE REGISTRO
 
-    /**
-     * Registra um novo usuário no sistema
-     *
-     * @param registerDTO dados para registro do usuário
-     * @return ID do usuário criado
-     */
-    @Transactional
+        @Transactional
     @Operation(description = "Registra um novo usuário no sistema")
     public Long register(RegisterDTO registerDTO) {
         validateUserRegistration(registerDTO);
@@ -64,19 +57,12 @@ public class AuthService {
 
         User savedUser = userRepository.save(user);
 
-        publishUserRegisteredEvent(savedUser.getId());
-
+        eventPublisher.publishEvent(new UserRegisteredEvent(savedUser.getId()));
         return savedUser.getId();
     }
-    // ===== OPERAÇÕES DE AUTENTICAÇÃO =====
+     // OPERAÇÕES DE AUTENTICAÇÃO
 
-    /**
-     * Realiza o login do usuário
-     *
-     * @param loginDTO dados de login (login e password)
-     * @return LoginResponseDTO com token JWT e role do usuário
-     */
-    @Operation(description = "Realiza o login do usuário")
+        @Operation(description = "Realiza o login do usuário")
     public LoginResponseDTO login(LoginDTO loginDTO) {
         try {
             Authentication authentication = authenticationManager.authenticate(
@@ -99,36 +85,23 @@ public class AuthService {
         }
     }
 
-    // ===== MÉTODOS AUXILIARES PRIVADOS =====
+     //  MÉTODOS AUXILIARES PRIVADOS
 
-    /**
-     * Valida se um usuário pode ser registrado
-     *
-     * @param registerDTO dados para registro
-     */
+        @Operation(description = "Valida se um usuário pode ser registrado")
     private void validateUserRegistration(RegisterDTO registerDTO) {
         if (userRepository.existsByLogin(registerDTO.login())) {
             throw new BusinessException("Login já cadastrado!", ErrorCode.USER_ALREADY_EXISTS);
         }
     }
 
-    /**
-     * Cria uma entidade User a partir do RegisterDTO
-     *
-     * @param registerDTO dados para registro
-     * @return User criado
-     */
+        @Operation(description = "Cria uma entidade user a partir do DTO")
     private User createUserFromRegisterDTO(RegisterDTO registerDTO) {
         return userConverter.toEntity(registerDTO)
                 .withPassword(passwordEncoder.encode(registerDTO.password()))
                 .withRole(registerDTO.role());
     }
 
-    /**
-     * Publica evento de usuário registrado
-     *
-     * @param userId ID do usuário registrado
-     */
+        @Operation(description = "Publica evento no rabbit quando um usuário é registrado")
     private void publishUserRegisteredEvent(Long userId) {
         eventPublisher.publishEvent(new UserRegisteredEvent(userId));
     }

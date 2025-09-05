@@ -1,8 +1,8 @@
 package com.project2025.digital_library_platform.repositories;
 
 
-import com.project2025.digital_library_platform.domain.book.Book;
-import com.project2025.digital_library_platform.domain.book.Status;
+import com.project2025.digital_library_platform.entity.book.Book;
+import com.project2025.digital_library_platform.entity.book.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -11,67 +11,11 @@ import java.util.Optional;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    // ===== BUSCAS EXATAS =====
-
-    /**
-     * Verifica se existe um livro com o ISBN informado
-     *
-     * @param isbn código ISBN do livro
-     */
-  //  boolean existsByIsbn(String isbn);
-
-    /**
-     * Verifica se existe um livro com o título exato informado
-     *
-     * @param title título exato do livro
-     */
     boolean existsByTitle(String title);
 
-    /**
-     * Busca um livro pelo código ISBN
-     *
-     * @param isbn código ISBN do livro para busca
-     */
-//    Optional<Book> findByIsbn(String isbn);
-
-    /**
-     * Busca livros pelo ano de publicação
-     *
-     * @param year ano de publicação do livro
-     */
-  //  List<Book> findByPublicationYear(Integer year);
-
-    /**
-     * Busca livros por status de ativo e status do livro
-     *
-     * @param active true para livros ativos, false para inativos
-     * @param status status do livro (AVAILABLE, LOANED, UNAVAILABLE)
-     */
     List<Book> findByActiveAndStatus(Boolean active, Status status);
 
-    // ===== BUSCAS CASE INSENSITIVE E CONTAINING =====
-
-    /**
-     * Busca livros por autor - case insensitive e containing
-     *
-     * @param authors nome ou parte do nome do autor
-     */
-    List<Book> findByAuthorsContainingIgnoreCase(String authors);
-
-    /**
-     * Busca livros por título - case insensitive e containing
-     *
-     * @param title título ou parte do título do livro
-     */
     List<Book> findByTitleContainingIgnoreCase(String title);
-
-    /**
-     * Busca livros por nome da editora - case insensitive e containing
-     *
-   //  * @param publisherName nome ou parte do nome da editora
-     */
- //   Optional<Book> findByPublisherNameContainingIgnoreCase(String publisherName);
-
 
     boolean existsByIsbn10(String isbn10);
 
@@ -81,4 +25,14 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Query("SELECT b FROM Book b where b.isbn10 = ?1 OR b.isbn13 = ?2")
     Optional<Book> findByIsbn10OrIsbn13(String isbn10, String isbn13);
+
+    // Optional<Book> findByPublisherNameContainingIgnoreCase(String publisherName);
+
+    // List<Book> findByAuthorsContainingIgnoreCase(String authors);
+
+    //  Optional<Book> findByIsbn(String isbn);
+
+    //  List<Book> findByPublicationYear(Integer year);
+
+    //  boolean existsByIsbn(String isbn);
 }

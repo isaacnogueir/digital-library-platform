@@ -1,22 +1,19 @@
 package com.project2025.digital_library_platform.services;
 
 import com.project2025.digital_library_platform.converters.UserConverter;
-import com.project2025.digital_library_platform.domain.book.Status;
-import com.project2025.digital_library_platform.domain.user.Dtos.UserResponseDTO;
-import com.project2025.digital_library_platform.domain.user.Dtos.UserUpdateDTO;
-import com.project2025.digital_library_platform.domain.user.Role;
-import com.project2025.digital_library_platform.domain.user.User;
+import com.project2025.digital_library_platform.DTOs.userDtos.UserResponseDTO;
+import com.project2025.digital_library_platform.DTOs.userDtos.UserUpdateDTO;
+import com.project2025.digital_library_platform.entity.user.Role;
+import com.project2025.digital_library_platform.entity.user.User;
 import com.project2025.digital_library_platform.exception.BusinessException;
 import com.project2025.digital_library_platform.exception.ErrorCode;
 import com.project2025.digital_library_platform.repositories.UserRepository;
-import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InOrder;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
